@@ -1,0 +1,27 @@
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.6.0;
+
+contract register
+{
+   
+    bytes32 public ecu1;
+    bytes32 public ecu2;
+    bytes32 public ecu3;
+    bytes32 public ssid;
+    bytes32 public bhash;
+    uint256 public tmsp;
+
+     function generate(string memory str1,string memory str2,string memory str3) public
+    {
+
+        ecu1 =keccak256(abi.encodePacked(str1));
+        ecu2 = keccak256(abi.encodePacked(str2));
+        ecu3 = keccak256(abi.encodePacked(str3));
+        bytes32 random=ecu1^ecu2;
+        random=random^ecu3;
+        ssid = (keccak256(abi.encodePacked(random)));
+        bhash=blockhash(0);
+        tmsp=block.timestamp;
+    }
+  
+}
