@@ -18,9 +18,13 @@ contract VerifySignature {
         bytes32 messageHash,
         bytes memory signature,
         address _signer
-    ) public pure returns (bool) {
+    ) public pure returns (string memory,string memory) {
 
-        return recoverSigner(messageHash, signature) == _signer;
+        bool v=recoverSigner(messageHash, signature) == _signer;
+        string memory res;string memory status;
+        if(v) {res="Signature Verification Successful!";status="Thanks, your message has been received!";}
+        else {res="Signature verifiction Failed!!";status="INVALID ADDRESS!!";}
+        return (res,status);
     }
 
     function recoverSigner(bytes32 messageHash, bytes memory _signature)
@@ -54,4 +58,5 @@ contract VerifySignature {
 
         // implicitly return (r, s, v)
     }
+    
 }
