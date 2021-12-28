@@ -3,17 +3,6 @@ pragma solidity ^0.6.0;
 
 contract VerifySignature {
     
-    function getEthSignedMessageHash(bytes32 _messageHash)
-        internal
-        pure
-        returns (bytes32)
-    {
-        return
-            keccak256(
-                abi.encodePacked("\x19Ethereum Signed Message:\n32", _messageHash)
-            );
-    }
-
     function verify(
         bytes32 messageHash,
         bytes memory signature,
